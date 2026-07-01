@@ -2,29 +2,25 @@ apiVersion: apps/v1
 kind: Deployment
 
 metadata:
-  name: {{ include "nginx.fullname" . }}
+  name: nginx
   namespace: {{ .Values.namespace }}
-  labels:
-    {{- include "nginx.labels" . | nindent 4 }}
 
 spec:
   replicas: {{ .Values.replicaCount }}
 
   selector:
     matchLabels:
-      {{- include "nginx.selectorLabels" . | nindent 6 }}
+      app: nginx
 
   template:
     metadata:
       labels:
-        {{- include "nginx.selectorLabels" . | nindent 8 }}
+        app: nginx
 
     spec:
       containers:
-        - name: {{ .Chart.Name }}
-
+        - name: nginx
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-
           imagePullPolicy: {{ .Values.image.pullPolicy }}
 
           ports:
