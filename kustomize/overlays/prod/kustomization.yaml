@@ -4,7 +4,7 @@ kind: Kustomization
 resources:
   - ../../base
 
-
+nameSuffix: -prod
 
 patches:
   - path: replica-patch.yaml
