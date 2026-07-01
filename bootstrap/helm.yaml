@@ -8,7 +8,7 @@ spec:
   project: default
 
   source:
-    repoURL: git@github.com:Alaaibrahim2/argocd-.git
+    repoURL: https://github.com/Alaaibrahim2/argocd-.git
     targetRevision: main
     path: nginx
 
