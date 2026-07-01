@@ -1,6 +1,6 @@
 replicaCount: 2
 
-namespace: demo
+namespace: default
 
 image:
   repository: nginx
