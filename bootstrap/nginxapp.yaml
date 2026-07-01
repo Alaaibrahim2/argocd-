@@ -8,7 +8,7 @@ spec:
 
   source:
     repoURL: https://github.com/Alaaibrahim2/argocd-.git
-    targetRevision: HEAD
+    targetRevision: main
     path: agocd-demo
 
   destination:
