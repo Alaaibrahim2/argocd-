@@ -1,0 +1,47 @@
+# rollout.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: my-app
+  namespace: production
+spec:
+  replicas: 3
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+        - name: my-app
+          image: myorg/my-app:1.0.0
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "200m"
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 10
+  strategy:
+    blueGreen:
+      # Service that serves live production traffic
+      activeService: my-app-active
+      # Service for the new version (preview/testing)
+      previewService: my-app-preview
+      # Auto-promote after the preview is ready (set to false for manual promotion)
+      autoPromotionEnabled: false
+      # How long to wait before scaling down the old version after promotion
+      scaleDownDelaySeconds: 30
+      # Optional: number of seconds to wait after preview is ready before auto-promotion
+      # autoPromotionSeconds: 60
