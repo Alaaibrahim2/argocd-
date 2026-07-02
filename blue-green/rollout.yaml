@@ -27,12 +27,7 @@ spec:
             limits:
               memory: "256Mi"
               cpu: "200m"
-          readinessProbe:
-            httpGet:
-              path: /health
-              port: 80
-            initialDelaySeconds: 5
-            periodSeconds: 10
+          
   strategy:
     blueGreen:
       # Service that serves live production traffic
