@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: my-app
-          image: myorg/my-app:1.0.0
+          image: nginx
           ports:
             - containerPort: 80
           resources:
